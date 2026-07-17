@@ -343,81 +343,7 @@
     }
     .footer-ig:hover { color: var(--terr); }
 
-    /* ─── SERVICIOS ─── */
-    .servicio-block {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6vw;
-      align-items: center;
-      margin-top: 3rem;
-    }
-    .servicio-texto h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.8rem, 3vw, 2.6rem);
-      font-weight: 400; color: var(--bark);
-      margin-bottom: 1.4rem; line-height: 1.2;
-    }
-    .servicio-texto p {
-      font-size: .97rem; line-height: 1.85;
-      color: var(--mid); font-weight: 300;
-      margin-bottom: 1rem;
-    }
-    .btn-wa-servicio {
-      display: inline-flex; align-items: center; gap: .5rem;
-      margin-top: 1.4rem;
-      background: #25D366; color: #fff;
-      padding: .75rem 1.6rem; border-radius: 2rem;
-      font-size: .88rem; text-decoration: none;
-      font-weight: 500; letter-spacing: .03em;
-      transition: background .2s, transform .15s;
-      box-shadow: 0 4px 18px rgba(37,211,102,.3);
-    }
-    .btn-wa-servicio:hover { background: #1ebe5a; transform: translateY(-2px); }
-
-    /* Carrusel */
-    .servicio-carrusel {
-      position: relative;
-      border-radius: 1.2rem;
-      overflow: hidden;
-      aspect-ratio: 4/3;
-      box-shadow: 0 20px 60px rgba(46,35,24,.15);
-    }
-    .carrusel-inner { width: 100%; height: 100%; position: relative; }
-    .carrusel-slide {
-      position: absolute; inset: 0;
-      opacity: 0; transition: opacity .6s ease;
-    }
-    .carrusel-slide.active { opacity: 1; }
-    .carrusel-slide img {
-      width: 100%; height: 100%;
-      object-fit: cover; display: block;
-    }
-    .carrusel-btn {
-      position: absolute; top: 50%; transform: translateY(-50%);
-      background: rgba(250,246,239,.85); border: none;
-      width: 38px; height: 38px; border-radius: 50%;
-      font-size: 1rem; cursor: pointer; z-index: 10;
-      display: flex; align-items: center; justify-content: center;
-      color: var(--bark); transition: background .2s;
-      backdrop-filter: blur(4px);
-    }
-    .carrusel-btn:hover { background: rgba(250,246,239,1); }
-    .carrusel-btn.prev { left: .8rem; }
-    .carrusel-btn.next { right: .8rem; }
-    .carrusel-dots {
-      position: absolute; bottom: .8rem; left: 50%; transform: translateX(-50%);
-      display: flex; gap: .4rem; z-index: 10;
-    }
-    .dot {
-      width: 8px; height: 8px; border-radius: 50%;
-      background: rgba(250,246,239,.5); cursor: pointer;
-      transition: background .2s;
-    }
-    .dot.active { background: rgba(250,246,239,1); }
-
-    @media (max-width: 900px) {
-      .servicio-block { grid-template-columns: 1fr; }
-    }
+    /* ─── ANIMATIONS ─── */
     .fade-in { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
     .fade-in.visible { opacity: 1; transform: translateY(0); }
 
@@ -610,54 +536,7 @@
     </div>
   </section>
 
-  <!-- SERVICIOS -->
-  <section id="servicios" style="padding: 8rem 8vw; background: var(--sand);">
-    <p class="section-label fade-in">Servicios</p>
-    <h2 class="section-title fade-in">Un espacio para <em>honrarte</em></h2>
-
-    <div class="servicio-block fade-in">
-      <!-- TEXTO IZQUIERDA -->
-      <div class="servicio-texto">
-        <h3>Ritual de cerrada energética</h3>
-        <p>
-          Ritual que invita a honrar-nos y reconocer los ciclos de Vida-Muerte-Vida que nos habitan.
-        </p>
-        <p>
-          "La cerrada" es un ritual ancestral de origen mexicano que nos ayuda a dar cierre a procesos de transformación vital profunda, un ritual de paso para poder abrirnos a las nuevas etapas desde un lugar esencial.
-        </p>
-        <p>
-          Es especialmente recomendable cuando ha habido pérdidas intrauterinas o neonatales, cuando hemos vivido un duelo profundo o cuando, simplemente, queremos encarnar una nueva realidad en nuestra cuerpa.
-        </p>
-        <a class="btn-wa-servicio" href="https://wa.me/5493424287412?text=Hola%20Micaela!%20Me%20gustaría%20saber%20más%20sobre%20el%20Ritual%20de%20Cerrada%20Energética%20🌿" target="_blank" rel="noopener">
-          Consultar por WhatsApp
-        </a>
-      </div>
-
-      <!-- CARRUSEL DERECHA -->
-      <div class="servicio-carrusel">
-        
-        <div class="carrusel-inner">
-             <div class="carrusel-slide active">
-        <img src="images/ritual-cerrada-01.jpeg" alt="Ritual de Cerrada Energética">
-    </div>
-
-  
-          
-    
-          </div>
-        </div>
-
-        <!-- Controles -->
-        <button class="carrusel-btn prev" onclick="moverCarrusel(-1)">&#8592;</button>
-        <button class="carrusel-btn next" onclick="moverCarrusel(1)">&#8594;</button>
-
-        <!-- Indicadores -->
-        <div class="carrusel-dots">
-<div class="carrusel-dots">
-    <span class="dot active" onclick="irASlide(0)"></span>
-</div>
-          
-  </section>
+  <!-- TESTIMONIALS -->
   <section id="testimonios">
     <p class="section-label fade-in">Familias</p>
     <h2 class="section-title fade-in">Palabras que <em>me llenan el corazón</em></h2>
@@ -709,24 +588,6 @@
   </footer>
 
   <script>
-    // ── Carrusel ──
-    let slideActual = 0;
-    const slides = document.querySelectorAll('.carrusel-slide');
-    const dots = document.querySelectorAll('.dot');
-
-    function mostrarSlide(n) {
-      slides.forEach(s => s.classList.remove('active'));
-      dots.forEach(d => d.classList.remove('active'));
-      slideActual = (n + slides.length) % slides.length;
-      slides[slideActual].classList.add('active');
-      dots[slideActual].classList.add('active');
-    }
-    function moverCarrusel(dir) { mostrarSlide(slideActual + dir); }
-    function irASlide(n) { mostrarSlide(n); }
-
-    // Auto-avance cada 4 segundos
-    setInterval(() => moverCarrusel(1), 4000);
-
     // ── WhatsApp helper ──
     const WA_NUMBER = '5493424287412';
     function waLink(msg) {
