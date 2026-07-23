@@ -61,7 +61,7 @@
     /* ─── HERO ─── */
     #hero {
       min-height: 100vh;
-      display: grid; grid-template-columns: 1fr 1fr;
+      display: grid; grid-template-columns: 1.4fr 0.6fr;
       padding-top: 80px;
     }
     .hero-left {
@@ -381,7 +381,10 @@
     /* ─── RESPONSIVE ─── */
     @media (max-width: 900px) {
       #hero { grid-template-columns: 1fr; }
-      .hero-right { min-height: 220px; }
+      #hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-left { padding: 5vw 6vw; }
+      .hero-right { min-height: 180px; }
+      .botanical svg { width: 35%; height: 35%; }
       .services-grid { grid-template-columns: 1fr; }
       #sobre-mi { grid-template-columns: 1fr; }
       .about-img { max-width: 280px; margin: 0 auto; }
@@ -690,4 +693,3 @@
   </script>
 </body>
 </html>
-
