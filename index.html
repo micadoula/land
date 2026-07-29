@@ -334,12 +334,12 @@
     .servicios-track-wrap:active { cursor: grabbing; }
     .servicios-track {
       display: flex;
-      gap: 2rem;
       transition: transform .45s cubic-bezier(.25,.1,.25,1);
       will-change: transform;
     }
     .servicio-card-h {
-      min-width: calc(100% - 4rem);
+      width: 100%;
+      min-width: 100%;
       display: grid;
       grid-template-columns: 1.2fr 0.8fr;
       gap: 4vw;
@@ -349,17 +349,20 @@
       padding: 2.5rem 3rem;
       box-shadow: 0 8px 40px rgba(46,35,24,.08);
       flex-shrink: 0;
+      box-sizing: border-box;
     }
     .servicio-card-h .srv-texto h3 {
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(1.8rem, 3vw, 2.6rem);
       font-weight: 400; color: var(--bark);
       margin-bottom: 1.4rem; line-height: 1.2;
+      text-align: left;
     }
     .servicio-card-h .srv-texto p {
       font-size: .97rem; line-height: 1.85;
       color: var(--mid); font-weight: 300;
       margin-bottom: 1rem;
+      text-align: justify;
     }
     .srv-placeholder {
       display: flex; flex-direction: column;
@@ -697,16 +700,12 @@
     const srvTotal = 2;
     const track = document.getElementById('serviciosTrack');
     const srvDots = document.querySelectorAll('.srv-dot');
-    const srvPrev = document.getElementById('srvPrev');
-    const srvNext = document.getElementById('srvNext');
 
     function irServicio(n) {
       srvActual = Math.max(0, Math.min(n, srvTotal - 1));
       const cardW = track.parentElement.offsetWidth;
-      track.style.transform = `translateX(-${srvActual * (cardW + 32)}px)`;
+      track.style.transform = `translateX(-${srvActual * cardW}px)`;
       srvDots.forEach((d, i) => d.classList.toggle('active', i === srvActual));
-      srvPrev.disabled = srvActual === 0;
-      srvNext.disabled = srvActual === srvTotal - 1;
     }
     function moverServicios(dir) { irServicio(srvActual + dir); }
 
@@ -727,6 +726,9 @@
       if (Math.abs(diff) > 40) moverServicios(diff > 0 ? 1 : -1);
       dragStart = null;
     });
+
+    // Recalcular si cambia el tamaño de ventana
+    window.addEventListener('resize', () => irServicio(srvActual));
 
     // ── WhatsApp helper ──
     const WA_NUMBER = '5493424287412';
