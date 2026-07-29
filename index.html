@@ -238,26 +238,60 @@
     .value span { font-size: .78rem; text-transform: uppercase; letter-spacing: .1em; color: var(--mid); }
 
     /* ─── PROCESS ─── */
-    #proceso { padding: 8rem 8vw; background: var(--cream); }
-    .process-grid {
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 4rem;
+    #proceso { padding: 8rem 8vw 6rem; background: var(--cream); }
+    .process-flow {
+      position: relative;
+      margin-top: 5rem;
+      padding-bottom: 2rem;
     }
-    .process-step {
-      padding: 2rem 1.5rem; border-top: 1px solid rgba(122,92,62,.2);
-      transition: background .3s; border-radius: 0 0 .8rem .8rem;
+    /* Hilo ondulado SVG de fondo */
+    .process-thread {
+      position: absolute;
+      top: 18px; left: 0; right: 0;
+      width: 100%; height: 80px;
+      pointer-events: none;
+      z-index: 0;
     }
-    .process-step:hover { background: var(--sand); }
-    .step-num {
+    .flow-nodes {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      position: relative;
+      z-index: 1;
+    }
+    .flow-node {
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center;
+      padding: 0 1rem;
+    }
+    /* Punto del nodo */
+    .flow-dot {
+      width: 14px; height: 14px; border-radius: 50%;
+      background: var(--terr);
+      border: 3px solid var(--cream);
+      box-shadow: 0 0 0 2px var(--terr);
+      margin-bottom: 1.6rem;
+      flex-shrink: 0;
+      transition: transform .3s;
+    }
+    .flow-node:hover .flow-dot { transform: scale(1.4); }
+    .flow-node h4 {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 3.5rem; font-weight: 300; color: rgba(193,122,74,.25);
-      line-height: 1; margin-bottom: 1rem;
+      font-size: 1.3rem; font-weight: 400;
+      color: var(--bark); margin-bottom: .7rem;
+      line-height: 1.2;
     }
-    .process-step h4 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.35rem; font-weight: 400; color: var(--bark);
-      margin-bottom: .7rem;
+    .flow-node p {
+      font-size: .86rem; line-height: 1.75;
+      color: var(--mid); font-weight: 300;
     }
-    .process-step p { font-size: .88rem; line-height: 1.7; color: var(--mid); font-weight: 300; }
+    @media (max-width: 900px) {
+      .flow-nodes { grid-template-columns: 1fr 1fr; }
+      .process-thread { display: none; }
+    }
+    @media (max-width: 560px) {
+      .flow-nodes { grid-template-columns: 1fr; }
+    }
 
     /* ─── TESTIMONIALS ─── */
 
@@ -430,11 +464,9 @@
       .services-grid { grid-template-columns: 1fr; }
       #sobre-mi { grid-template-columns: 1fr; }
       .about-img { max-width: 280px; margin: 0 auto; }
-      .process-grid { grid-template-columns: 1fr 1fr; }
       .nav-links { display: none; }
     }
     @media (max-width: 600px) {
-      .process-grid { grid-template-columns: 1fr; }
       .intro-strip { flex-direction: column; }
       footer { flex-direction: column; text-align: center; }
     }
@@ -535,26 +567,6 @@
       line-height: 1;
       pointer-events: none;
     }
-
-    /* Línea conectora entre pasos del proceso */
-    .process-grid {
-      position: relative;
-    }
-    .process-grid::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 12.5%; right: 12.5%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--terr), var(--sage), var(--terr), transparent);
-      opacity: .4;
-    }
-
-    /* Borde izquierdo terracota en steps */
-    .process-step {
-      border-left: 3px solid transparent;
-      transition: background .3s, border-color .3s;
-    }
-    .process-step:hover { border-left-color: var(--terr); }
 
     /* Botánico decorativo en esquinas de secciones */
     .botanical-corner {
@@ -692,27 +704,43 @@
       <ellipse cx="165" cy="175" rx="9" ry="14" fill="rgba(90,107,74,0.4)" transform="rotate(15 165 175)"/>
     </svg>
     <p class="section-label fade-in">Cómo trabajamos</p>
-    <h2 class="section-title fade-in">Un camino <em>paso a paso</em>, juntas</h2>
-    <div class="process-grid">
-      <div class="process-step fade-in">
-        <div class="step-num">01</div>
-        <h4>Primera charla</h4>
-        <p>Una llamada o encuentro gratuito para conocernos, contarme tu historia y ver si somos un buen equipo.</p>
-      </div>
-      <div class="process-step fade-in">
-        <div class="step-num">02</div>
-        <h4>Encuentros prenatales</h4>
-        <p>Dos o tres sesiones durante el embarazo para preparar el plan de parto, trabajar expectativas y generar confianza.</p>
-      </div>
-      <div class="process-step fade-in">
-        <div class="step-num">03</div>
-        <h4>El día del parto</h4>
-        <p>Estoy disponible 24/7 cuando llegue el momento. Te acompaño desde el inicio del trabajo de parto hasta que nazca tu bebé.</p>
-      </div>
-      <div class="process-step fade-in">
-        <div class="step-num">04</div>
-        <h4>Visitas de postparto</h4>
-        <p>Uno a dos encuentros después del nacimiento para sostener el cuarto de semanas, la lactancia y tu bienestar.</p>
+    <h2 class="section-title fade-in">Un camino que <em>fluye</em>, juntas</h2>
+
+    <div class="process-flow">
+      <!-- Hilo ondulado SVG -->
+      <svg class="process-thread" viewBox="0 0 1000 80" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 125 18 C 200 60, 300 0, 375 18 C 450 36, 550 60, 625 18 C 700 -24, 800 60, 875 18"
+          stroke="url(#threadGrad)" stroke-width="1.5" stroke-dasharray="6 4" fill="none" opacity=".5"/>
+        <defs>
+          <linearGradient id="threadGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#C17A4A" stop-opacity="0.3"/>
+            <stop offset="50%" stop-color="#5A6B4A" stop-opacity="0.6"/>
+            <stop offset="100%" stop-color="#C17A4A" stop-opacity="0.3"/>
+          </linearGradient>
+        </defs>
+      </svg>
+
+      <div class="flow-nodes">
+        <div class="flow-node fade-in">
+          <div class="flow-dot"></div>
+          <h4>Primera charla</h4>
+          <p>Un encuentro gratuito para conocernos, escucharte y ver si resonamos juntas.</p>
+        </div>
+        <div class="flow-node fade-in">
+          <div class="flow-dot"></div>
+          <h4>Encuentros prenatales</h4>
+          <p>Sesiones durante el embarazo para preparar el parto, trabajar expectativas y generar confianza.</p>
+        </div>
+        <div class="flow-node fade-in">
+          <div class="flow-dot"></div>
+          <h4>El nacimiento</h4>
+          <p>Presencia continua desde el inicio del trabajo de parto hasta que tu bebé llegue al mundo.</p>
+        </div>
+        <div class="flow-node fade-in">
+          <div class="flow-dot"></div>
+          <h4>Postparto</h4>
+          <p>Acompañamiento en el cuarto de semanas, la lactancia y el nuevo universo que empieza.</p>
+        </div>
       </div>
     </div>
   </section>
