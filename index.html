@@ -247,8 +247,8 @@
     /* Hilo ondulado SVG de fondo */
     .process-thread {
       position: absolute;
-      top: 18px; left: 0; right: 0;
-      width: 100%; height: 80px;
+      top: 8px; left: 0; right: 0;
+      width: 100%; height: 70px;
       pointer-events: none;
       z-index: 0;
     }
@@ -265,16 +265,8 @@
       padding: 0 1rem;
     }
     /* Punto del nodo */
-    .flow-dot {
-      width: 14px; height: 14px; border-radius: 50%;
-      background: var(--terr);
-      border: 3px solid var(--cream);
-      box-shadow: 0 0 0 2px var(--terr);
-      margin-bottom: 1.6rem;
-      flex-shrink: 0;
-      transition: transform .3s;
-    }
-    .flow-node:hover .flow-dot { transform: scale(1.4); }
+    .flow-dot { display: none; }
+    .flow-node:hover .flow-dot { display: none; }
     .flow-node h4 {
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.3rem; font-weight: 400;
@@ -709,35 +701,54 @@
     <div class="process-flow">
       <!-- Hilo ondulado SVG -->
       <svg class="process-thread" viewBox="0 0 1000 80" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M 125 18 C 200 60, 300 0, 375 18 C 450 36, 550 60, 625 18 C 700 -24, 800 60, 875 18"
-          stroke="url(#threadGrad)" stroke-width="1.5" stroke-dasharray="6 4" fill="none" opacity=".5"/>
         <defs>
           <linearGradient id="threadGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#C17A4A" stop-opacity="0.3"/>
-            <stop offset="50%" stop-color="#5A6B4A" stop-opacity="0.6"/>
-            <stop offset="100%" stop-color="#C17A4A" stop-opacity="0.3"/>
+            <stop offset="0%" stop-color="#C17A4A" stop-opacity="0"/>
+            <stop offset="25%" stop-color="#C17A4A" stop-opacity="0.35"/>
+            <stop offset="50%" stop-color="#5A6B4A" stop-opacity="0.3"/>
+            <stop offset="75%" stop-color="#C17A4A" stop-opacity="0.35"/>
+            <stop offset="100%" stop-color="#C17A4A" stop-opacity="0"/>
           </linearGradient>
         </defs>
+
+        <!-- Hilo principal suave -->
+        <path d="M 80 20 C 200 55, 320 0, 500 22 C 680 44, 800 5, 920 20"
+          stroke="url(#threadGrad)" stroke-width="1" fill="none"/>
+
+        <!-- Pequeñas hojas sobre el hilo -->
+        <!-- Hoja 1 -->
+        <ellipse cx="250" cy="28" rx="6" ry="3" fill="rgba(90,107,74,0.18)" transform="rotate(-20 250 28)"/>
+        <line x1="250" y1="28" x2="250" y2="20" stroke="rgba(90,107,74,0.2)" stroke-width=".8"/>
+
+        <!-- Hoja 2 -->
+        <ellipse cx="500" cy="22" rx="7" ry="3" fill="rgba(193,122,74,0.15)" transform="rotate(10 500 22)"/>
+        <line x1="500" y1="22" x2="500" y2="14" stroke="rgba(193,122,74,0.18)" stroke-width=".8"/>
+
+        <!-- Hoja 3 -->
+        <ellipse cx="750" cy="15" rx="6" ry="3" fill="rgba(90,107,74,0.18)" transform="rotate(-15 750 15)"/>
+        <line x1="750" y1="15" x2="750" y2="8" stroke="rgba(90,107,74,0.2)" stroke-width=".8"/>
+
+        <!-- Pequeños círculos suaves en los nodos -->
+        <circle cx="125" cy="20" r="3" fill="rgba(193,122,74,0.2)"/>
+        <circle cx="375" cy="18" r="3" fill="rgba(193,122,74,0.2)"/>
+        <circle cx="625" cy="26" r="3" fill="rgba(193,122,74,0.2)"/>
+        <circle cx="875" cy="20" r="3" fill="rgba(193,122,74,0.2)"/>
       </svg>
 
       <div class="flow-nodes">
         <div class="flow-node fade-in">
-          <div class="flow-dot"></div>
           <h4>Primera charla</h4>
           <p>Un encuentro gratuito para conocernos, escucharte y ver si resonamos juntas.</p>
         </div>
         <div class="flow-node fade-in">
-          <div class="flow-dot"></div>
           <h4>Encuentros prenatales</h4>
           <p>Sesiones durante el embarazo para preparar el parto, trabajar expectativas y generar confianza.</p>
         </div>
         <div class="flow-node fade-in">
-          <div class="flow-dot"></div>
           <h4>El nacimiento</h4>
           <p>Presencia continua desde el inicio del trabajo de parto hasta que tu bebé llegue al mundo.</p>
         </div>
         <div class="flow-node fade-in">
-          <div class="flow-dot"></div>
           <h4>Postparto</h4>
           <p>Acompañamiento en el cuarto de semanas, la lactancia y el nuevo universo que empieza.</p>
         </div>
